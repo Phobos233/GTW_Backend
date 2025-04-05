@@ -5,7 +5,6 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
 @Data
-
 public class User {
     @Id
     private long id;

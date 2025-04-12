@@ -40,4 +40,22 @@ public class PlantController {
         return plantService.getPlantByFamilyContains(family);
     }
 
+    @RequestMapping("/createPlant")
+    public void createPlant(String Taxon, String Family, String region, String country) {
+        plantService.createPlant(Taxon, Family, region, country);
+    }
+    @RequestMapping("/deletePlant")
+    public void deletePlant(long id) {
+        plantService.deletePlant(id);
+    }
+    @RequestMapping("/updatePlant")
+    public void updatePlant(long id, String Taxon, String Family, String region, String country) {
+        plantService.updatePlant(id, Taxon, Family, region, country);
+    }
+    @RequestMapping("/findById")
+    public List<Plant> findById(long id) {
+        return plantService.findById(id);
+    }
+
+
 }

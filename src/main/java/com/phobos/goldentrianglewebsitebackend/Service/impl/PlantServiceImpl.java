@@ -45,4 +45,24 @@ public class PlantServiceImpl implements PlantService {
     public List<Plant> getPlantByFamilyContains(String family) {
         return plantRepo.getPlantByFamilyContains(family);
     }
+
+    @Override
+    public void createPlant(String Taxon, String Family, String region, String country) {
+        plantRepo.createPlant(Taxon, Family, region, country);
+    }
+
+    @Override
+    public void deletePlant(long id) {
+        plantRepo.deletePlant(id);
+    }
+
+    @Override
+    public void updatePlant(long id, String Taxon, String Family, String region, String country) {
+        plantRepo.updatePlant(id, Taxon, Family, region, country);
+    }
+
+    @Override
+    public List<Plant> findById(long id) {
+        return plantRepo.findById(id);
+    }
 }

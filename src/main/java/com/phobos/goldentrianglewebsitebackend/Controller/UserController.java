@@ -26,9 +26,14 @@ public class UserController {
     public ResultAPI login(@RequestBody User user) {
         System.out.println(user);
         List<User> loginUser = userService.findByUsernameAndPassword(user);
-        System.out.println(loginUser);
-         if (loginUser != null) {
-             return ResultAPI.success("Login successful");
+        System.out.println(loginUser.size());
+         if (!loginUser.isEmpty()) {
+             // 生成token
+             Map<String, String> map = new HashMap<>();
+             map.put("username", loginUser.getFirst().getUsername());
+             map.put("id", String.valueOf(loginUser.getFirst().getId()));
+             String token=JWTUtils.generateToken(map);
+             return ResultAPI.success("token:"+token,"Login successful");
          } else {
              return ResultAPI.error("Login failed");
          }

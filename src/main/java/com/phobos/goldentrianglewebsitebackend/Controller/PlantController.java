@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 public class PlantController {
+    // 处理植物相关请求的控制器
     private final PlantService plantService;
     @Autowired
     public PlantController(PlantService plantService) {

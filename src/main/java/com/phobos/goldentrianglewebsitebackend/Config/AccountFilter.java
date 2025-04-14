@@ -16,6 +16,7 @@ public class AccountFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String requestURI = request.getRequestURI();
         if (requestURI.contains("/login")) {
+            System.out.println("登录请求，放行");
             filterChain.doFilter(request, response);
             return;
         }

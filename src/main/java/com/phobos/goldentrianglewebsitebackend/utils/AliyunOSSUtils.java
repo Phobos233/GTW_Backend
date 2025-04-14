@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+
 @Component
 public class AliyunOSSUtils {
 
@@ -82,11 +83,11 @@ public class AliyunOSSUtils {
             if (ossClient != null) {
                 ossClient.shutdown();
             }
+        }
 
-    }
         return aliOSSProp.getEndpoint().split("//")[0]
                 + aliOSSProp.getBucketName()
                 + aliOSSProp.getEndpoint().split("//")[1]
                 + newFileName;
-}
+    }
 }

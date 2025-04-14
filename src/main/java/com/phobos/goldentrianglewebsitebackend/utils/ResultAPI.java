@@ -40,5 +40,11 @@ public class ResultAPI {
         resultAPI.setMessage(message);
         return resultAPI;
     }
+    public static ResultAPI error(Integer code, String message) {
+        ResultAPI resultAPI = error();
+        resultAPI.setCode(code);
+        resultAPI.setMessage(message);
+        return resultAPI;
+    }
 
 }

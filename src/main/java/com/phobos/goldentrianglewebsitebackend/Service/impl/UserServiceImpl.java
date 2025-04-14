@@ -19,8 +19,9 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public List<User> findByUsernameAndPassword(User user) {
-        System.out.println("Service返回："+userRepo.findByUsernameAndPassword(user));
-        return userRepo.findByUsernameAndPassword(user);
+//        System.out.println(user);
+//        System.out.println("Service返回："+userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword()));
+        return userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 
 

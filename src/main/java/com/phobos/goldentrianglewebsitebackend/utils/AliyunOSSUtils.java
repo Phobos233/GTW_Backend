@@ -22,8 +22,8 @@ public class AliyunOSSUtils {
     //注入配置类
     private AliOSSProp aliOSSProp;
     @Autowired
-    public void setAliOSSProp(AliOSSProp aliyOSSProp) {
-        this.aliOSSProp = aliyOSSProp;
+    public void setAliOSSProp(AliOSSProp aliOSSProp) {
+        this.aliOSSProp = aliOSSProp;
     }
 
     /**
@@ -37,7 +37,7 @@ public class AliyunOSSUtils {
         if (originalFileName != null) {
             suffix = originalFileName.substring(originalFileName.lastIndexOf("."));
         }
-        String newFileName= UUID.randomUUID().toString()+ suffix;
+        String newFileName= UUID.randomUUID() + suffix;
         // 填写Object完整路径，完整路径中不能包含Bucket名称，例如exampledir/exampleobject.txt。
         String objectName = dir+newFileName;
 

@@ -1,5 +1,6 @@
 package com.phobos.goldentrianglewebsitebackend.Controller;
 
+import com.phobos.goldentrianglewebsitebackend.Model.LoginInfo;
 import com.phobos.goldentrianglewebsitebackend.Model.User;
 import com.phobos.goldentrianglewebsitebackend.Service.UserService;
 import com.phobos.goldentrianglewebsitebackend.utils.JWTUtils;
@@ -33,11 +34,26 @@ public class UserController {
              map.put("username", loginUser.getFirst().getUsername());
              map.put("id", String.valueOf(loginUser.getFirst().getId()));
              String token=JWTUtils.generateToken(map);
-             return ResultAPI.success("token:"+token,"Login successful");
+
+             return ResultAPI.success(new LoginInfo(loginUser.getFirst().getUsername()
+                     ,loginUser.getFirst().getId()
+                     ,token)
+                     ,"Login successful");
          } else {
              return ResultAPI.error("Login failed");
          }
      }
+    @RequestMapping("/Auth")
+    public ResultAPI getUserByUsernameAndId(@RequestBody User user) {
+        System.out.println(user);
+        List<User> loginUser = userService.findUserByUsernameAndId(user);
+        System.out.println(loginUser.size());
+        if (!loginUser.isEmpty()) {
+            return ResultAPI.success(loginUser.getFirst(),"Get user successful");
+        } else {
+            return ResultAPI.error("Get user failed");
+        }
+    }
     @RequestMapping("/testJWT")
     public ResultAPI testJWT() {
         Map<String, String> map = new HashMap<>();
@@ -49,7 +65,16 @@ public class UserController {
     }
     @RequestMapping("/testJWTParse")
     public ResultAPI testJWTParse(String token) {
-        String data = JWTUtils.parseToken(token);
-        return ResultAPI.success("JWT parse successful,token:"+data);
+        User curUser = JWTUtils.parseToken(token);
+        return ResultAPI.success("JWT parse successful,token:"+curUser);
+    }
+    @RequestMapping("/getAllUser")
+    public ResultAPI getAllUser() {
+        List<User> allUser = userService.findAllUser();
+        if (!allUser.isEmpty()) {
+            return ResultAPI.success(allUser,"Get all user successful");
+        } else {
+            return ResultAPI.error("Get all user failed");
+        }
     }
 }

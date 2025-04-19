@@ -1,11 +1,13 @@
 package com.phobos.goldentrianglewebsitebackend.Controller;
 
+import com.phobos.goldentrianglewebsitebackend.Model.dto.ChartsInfo;
 import com.phobos.goldentrianglewebsitebackend.Model.Plant;
 import com.phobos.goldentrianglewebsitebackend.Service.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -56,6 +58,21 @@ public class PlantController {
     @RequestMapping("/findById")
     public List<Plant> findById(long id) {
         return plantService.findById(id);
+    }
+    @RequestMapping("/Chart")
+    public List<ChartsInfo> getChartsInfo() {
+        List<Plant> Plants = plantService.findAll();
+        List<ChartsInfo> chartsInfos = new ArrayList<>();
+        if (!Plants.isEmpty()) {
+            for (Plant plant : Plants) {
+                ChartsInfo chartsInfo = new ChartsInfo();
+                chartsInfo.setId(plant.getId());
+                chartsInfo.setName(plant.getTaxon());
+                chartsInfo.setValue(plant.getFamily());
+                chartsInfos.add(chartsInfo);
+            }
+        }
+        return  chartsInfos;
     }
 
 

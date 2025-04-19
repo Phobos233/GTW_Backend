@@ -1,6 +1,7 @@
 package com.phobos.goldentrianglewebsitebackend.utils;
 
 
+import com.phobos.goldentrianglewebsitebackend.Model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -27,11 +28,14 @@ public class JWTUtils {
         System.out.println(token);
         return token;
     }
-    public static String parseToken(String token) {
+    public static User parseToken(String token) {
 
         Claims claims = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
         System.out.println(claims);
-        return claims.toString();
+        User user = new User();
+        user.setUsername(claims.get("username",String.class));
+        user.setId(Long.parseLong(claims.get("id",String.class)));
+        return user;
 
     }
 

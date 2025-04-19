@@ -1,6 +1,7 @@
 package com.phobos.goldentrianglewebsitebackend.Config;
 
 import com.phobos.goldentrianglewebsitebackend.utils.JWTUtils;
+import com.phobos.goldentrianglewebsitebackend.utils.ResultAPI;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,6 +35,6 @@ public class AccountFilter implements Filter {
             return;
         }
         filterChain.doFilter(request,response);
-        return;
+        return ;
     }
 }

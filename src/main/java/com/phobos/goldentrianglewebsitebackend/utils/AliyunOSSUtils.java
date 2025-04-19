@@ -90,4 +90,5 @@ public class AliyunOSSUtils {
                 + aliOSSProp.getEndpoint().split("//")[1]
                 + newFileName;
     }
+
 }

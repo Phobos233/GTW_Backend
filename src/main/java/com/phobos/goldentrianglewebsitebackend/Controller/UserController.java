@@ -1,6 +1,6 @@
 package com.phobos.goldentrianglewebsitebackend.Controller;
 
-import com.phobos.goldentrianglewebsitebackend.Model.LoginInfo;
+import com.phobos.goldentrianglewebsitebackend.Model.dto.LoginInfo;
 import com.phobos.goldentrianglewebsitebackend.Model.User;
 import com.phobos.goldentrianglewebsitebackend.Service.UserService;
 import com.phobos.goldentrianglewebsitebackend.utils.JWTUtils;

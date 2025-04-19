@@ -1,4 +1,4 @@
-package com.phobos.goldentrianglewebsitebackend.Model;
+package com.phobos.goldentrianglewebsitebackend.Model.dto;
 
 import lombok.Data;
 

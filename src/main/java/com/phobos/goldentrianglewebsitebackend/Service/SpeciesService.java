@@ -45,4 +45,12 @@ public interface SpeciesService {
 
     // 更新物种
     void updateSpecies(long id, String taxon_rank,String taxon_name, String Family, String genus, String area, String ch_name,int publish_date);
+
+    //计数
+    int countSpeciesByGenus(String genus);
+    int countSpeciesByArea(String area);
+    int countSpeciesByFamily(String family);
+    int countSpeciesByPub_date(int pub_date);
+    int countAllSpecies();
+
 }

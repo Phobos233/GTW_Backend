@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ChartsEdgeInfo {
-    private long source;
-    private long target;
+    private String source;
+    private String target;
     private String value;
 }

@@ -5,6 +5,7 @@ import com.phobos.goldentrianglewebsitebackend.Repository.GenusRepo;
 import com.phobos.goldentrianglewebsitebackend.Service.GenusService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,6 +53,20 @@ public class GenusServiceImpl implements GenusService {
     }
 
     @Override
+    public List<Genus> findGenusByTaxonName(String taxon_name) {
+        return genusRepo.findGenusByTaxonName(taxon_name);
+    }
+
+    @Override
+    public List<Genus> findGenusByTaxonName(List<String> taxon_names) {
+        List<Genus> genus_result = new ArrayList<>();
+        for (String genus : taxon_names) {
+            genus_result.addAll(genusRepo.findGenusByTaxonName(genus));
+        }
+        return genus_result;
+    }
+
+    @Override
     public void createGenus(int plant_id, String taxon_rank, String taxon_name, String Family, String ch_name) {
         genusRepo.createGenus(plant_id, taxon_rank, taxon_name, Family, ch_name);
     }
@@ -64,5 +79,15 @@ public class GenusServiceImpl implements GenusService {
     @Override
     public void updateGenus(long node_id, String taxon_name, String Family, String taxon_rank, String ch_name) {
         genusRepo.updateGenus(node_id, taxon_name, Family, taxon_rank, ch_name);
+    }
+
+    @Override
+    public int countGenusByFamily(String family) {
+        return genusRepo.countGenusByFamily(family);
+    }
+
+    @Override
+    public int countAllGenus() {
+        return genusRepo.countAllGenus();
     }
 }

@@ -17,16 +17,16 @@ public interface GenusRepo extends Neo4jRepository<Genus, Long> {
             ",m.taxon_rank as taxon_rank" +
             ",m.family as family" +
             ",m.ch_name as ch_name" )
-    public List<Genus> findAllGenus();
+    List<Genus> findAllGenus();
 
-    // 通过植物学名模糊查找植物节点
+    // 通过植物学名模糊查找属节点
     @Query("Match (m:genus) Where m.taxon_name contains $name RETURN ID(m) as node_id" +
             ",m.plant_id as plant_id" +
             ",m.taxon_name as taxon_name" +
             ",m.taxon_rank as taxon_rank" +
             ",m.family as family" +
             ",m.ch_name as ch_name")
-    public List<Genus> getGenusByTaxonNameContains(String taxon_name);
+    List<Genus> getGenusByTaxonNameContains(String taxon_name);
 
     // 通过中文名模糊查找植物节点
     @Query("Match (m:genus) Where m.ch_name contains $ch_name RETURN ID(m) as node_id" +
@@ -35,7 +35,7 @@ public interface GenusRepo extends Neo4jRepository<Genus, Long> {
             ",m.taxon_rank as taxon_rank" +
             ",m.family as family" +
             ",m.ch_name as ch_name")
-    public List<Genus> getGenusByCh_nameContains(String ch_name);
+    List<Genus> getGenusByCh_nameContains(String ch_name);
 
     // 通过科名模糊查找属节点
     @Query("Match (m:genus) Where m.Family contains $family RETURN ID(m) as node_id" +
@@ -44,9 +44,9 @@ public interface GenusRepo extends Neo4jRepository<Genus, Long> {
             ",m.taxon_rank as taxon_rank" +
             ",m.family as family" +
             ",m.ch_name as ch_name")
-    public List<Genus> getGenusByFamilyContains(String family);
+    List<Genus> getGenusByFamilyContains(String family);
 
-    // 通过id查找植物节点
+    // 通过节点id查找属节点
     @Query("Match (m:genus) Where ID(m) = $id RETURN ID(m) as node_id" +
             ",m.plant_id as plant_id" +
             ",m.taxon_name as taxon_name" +
@@ -71,10 +71,20 @@ public interface GenusRepo extends Neo4jRepository<Genus, Long> {
             ",m.taxon_rank as taxon_rank" +
             ",m.family as family" +
             ",m.ch_name as ch_name")
-    public List<Genus> findGenusByFamily(String family);
+    List<Genus> findGenusByFamily(String family);
+
+    // 通过属名查找属节点
+
+    @Query("Match (m:genus) Where m.taxon_name = $TaxonName RETURN ID(m) as node_id" +
+            ",m.plant_id as plant_id" +
+            ",m.taxon_name as taxon_name" +
+            ",m.taxon_rank as taxon_rank" +
+            ",m.family as family" +
+            ",m.ch_name as ch_name")
+    List<Genus> findGenusByTaxonName(String TaxonName);
 
     /**
-     * 创建植物节点
+     * 创建属节点
      */
     @Query("CREATE (n:Genus {plant_id: $.plant_id" +
             ",taxon_rank: $taxon_rank" +
@@ -82,13 +92,18 @@ public interface GenusRepo extends Neo4jRepository<Genus, Long> {
             ",family: $Family " +
             ",ch_name: $ch_name" +
             "}) " )
-    public void createGenus(int plant_id, String taxon_rank, String taxon_name, String Family, String ch_name);
+    void createGenus(int plant_id, String taxon_rank, String taxon_name, String Family, String ch_name);
 
     @Query("MATCH (n:Genus) where ID(n)=$node_id DELETE n")
-    public void deleteGenus(long node_id);
+    void deleteGenus(long node_id);
 
     @Query("MATCH (n:Genus) where ID(n)=$node_id SET n.taxon_name = $taxon_name" +
             ", n.Family = $Family, n.taxon_rank = $taxon_rank, n.ch_name = $ch_name")
-    public void updateGenus(long node_id, String taxon_name, String Family, String taxon_rank, String ch_name);
+    void updateGenus(long node_id, String taxon_name, String Family, String taxon_rank, String ch_name);
 
+    @Query("Match (m:genus) Where m.Family = $Family RETURN count(m)")
+    int countGenusByFamily(String Family);
+
+    @Query("Match (m:genus) RETURN count(m)")
+    int countAllGenus();
 }

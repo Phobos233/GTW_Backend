@@ -41,9 +41,9 @@ public class RelationshipController {
         List<ChartsEdgeInfo> chartsEdgeInfos = new ArrayList<>();
         for (Relationship relationship : relationships) {
             ChartsEdgeInfo chartsEdgeInfo = new ChartsEdgeInfo();
-            chartsEdgeInfo.setSource(relationship.getStartNodeId());
+            chartsEdgeInfo.setSource(String.valueOf(relationship.getStartNodeId()));
             chartsEdgeInfo.setValue(relationship.getType());
-            chartsEdgeInfo.setTarget(relationship.getEndNodeId());
+            chartsEdgeInfo.setTarget(String.valueOf(relationship.getEndNodeId()));
             chartsEdgeInfos.add(chartsEdgeInfo);
         }
         return chartsEdgeInfos;

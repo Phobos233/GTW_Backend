@@ -88,9 +88,10 @@ public interface SpeciesRepo extends Neo4jRepository<Species, Long> {
             ",m.taxon_name as taxon_name" +
             ",m.taxon_rank as taxon_rank" +
             ",m.family as family" +
-            ",m.genus as genus" +
+            ",m.genus_c as genus" +
             ",m.area as area" +
-            ",m.publish_date as publish_date")
+            ",m.publish_date as publish_date"+
+            ",m.ch_name as ch_name")
     List<Species> findSpeciesByNodeId(long id);
 
     // 通过植物id查找植物节点
@@ -170,5 +171,17 @@ public interface SpeciesRepo extends Neo4jRepository<Species, Long> {
             ", n.genus = $genus" +
             ", n.publish_date = $publish_date")
     void updateSpecies(long id, String taxon_rank,String taxon_name, String Family, String genus, String area, String ch_name,int publish_date);
+
+    // 统计植物节点数量
+    @Query("Match (m:species) Where m.taxon_name = $taxon_name RETURN count(m)")
+    int countSpeciesByGenus(String genus);
+    @Query("Match (m:species) Where m.genus = $genus RETURN count(m)")
+    int countSpeciesByFamily(String family);
+    @Query("Match (m:species) Where m.area = $area RETURN count(m)")
+    int countSpeciesByArea(String area);
+    @Query("Match (m:species) Where m.publish_date = $publish_date RETURN count(m)")
+    int countSpeciesByPublish_date(int publish_date);
+    @Query("Match (m:species) RETURN count(m)")
+    int countAllSpecies();
 
 }

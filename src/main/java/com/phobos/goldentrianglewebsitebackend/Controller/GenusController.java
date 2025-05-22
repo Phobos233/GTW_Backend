@@ -65,4 +65,14 @@ public class GenusController {
         genusService.updateGenus(node_id, taxon_name, Family, taxon_rank, ch_name);
     }
 
+    @RequestMapping("/countGenusByFamily")
+    public int countGenusByFamily(String family) {
+        return genusService.countGenusByFamily(family);
+    }
+
+    @RequestMapping("/countAllGenus")
+    public int countAllGenus() {
+        return genusService.countAllGenus();
+    }
+
 }

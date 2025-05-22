@@ -65,7 +65,7 @@ public class PlantController {
         if (!Plants.isEmpty()) {
             for (Plant plant : Plants) {
                 ChartsInfo_Node chartsInfoNode = new ChartsInfo_Node();
-                chartsInfoNode.setId(plant.getId());
+                chartsInfoNode.setId(String.valueOf(plant.getId()));
                 chartsInfoNode.setName(plant.getTaxon());
                 chartsInfoNode.setValue(plant.getFamily());
                 chartsInfoNodes.add(chartsInfoNode);

@@ -26,6 +26,11 @@ public interface GenusService {
     // 根据科名查询属
     List<Genus> findGenusByFamily(String family);
 
+    // 根据属学名查询属
+    List<Genus> findGenusByTaxonName(String taxon_name);
+
+    List<Genus> findGenusByTaxonName(List<String> taxon_names);
+
     // 创建属
     void createGenus(int plant_id, String taxon_rank, String taxon_name, String Family, String ch_name);
 
@@ -34,4 +39,7 @@ public interface GenusService {
 
     // 更新属
     void updateGenus(long node_id, String taxon_name, String Family, String taxon_rank, String ch_name);
+    // 计数
+    int countGenusByFamily(String family);
+    int countAllGenus();
 }

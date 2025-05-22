@@ -73,8 +73,16 @@ public class SpeciesServiceImpl implements SpeciesService {
     }
 
     @Override
-    public void createSpecies(int plant_id, String taxon_rank, String taxon_name, String Family, String area, String genus, String ch_name, int publish_date) {
-        speciesRepo.createSpecies(plant_id, taxon_rank, taxon_name, Family, area, genus, ch_name, publish_date);
+    public void createSpecies(int plant_id
+            , String taxon_rank
+            , String taxon_name
+            , String Family
+            , String area
+            , String genus
+            , String ch_name
+            , int publish_date) {
+        speciesRepo.createSpecies(plant_id
+                , taxon_rank, taxon_name, Family, area, genus, ch_name, publish_date);
     }
 
     @Override
@@ -83,7 +91,39 @@ public class SpeciesServiceImpl implements SpeciesService {
     }
 
     @Override
-    public void updateSpecies(long id, String taxon_rank, String taxon_name, String Family, String genus, String area, String ch_name, int publish_date) {
+    public void updateSpecies(long id
+            , String taxon_rank
+            , String taxon_name
+            , String Family
+            , String genus
+            , String area
+            , String ch_name, int publish_date) {
         speciesRepo.updateSpecies(id, taxon_rank, taxon_name, Family, genus, area, ch_name, publish_date);
+    }
+
+    //计数
+    @Override
+    public int countSpeciesByGenus(String genus) {
+        return speciesRepo.countSpeciesByGenus(genus);
+    }
+
+    @Override
+    public int countSpeciesByArea(String area) {
+        return speciesRepo.countSpeciesByArea(area);
+    }
+
+    @Override
+    public int countSpeciesByFamily(String family) {
+        return speciesRepo.countSpeciesByFamily(family);
+    }
+
+    @Override
+    public int countSpeciesByPub_date(int pub_date) {
+        return speciesRepo.countSpeciesByPublish_date(pub_date);
+    }
+
+    @Override
+    public int countAllSpecies() {
+        return speciesRepo.countAllSpecies();
     }
 }

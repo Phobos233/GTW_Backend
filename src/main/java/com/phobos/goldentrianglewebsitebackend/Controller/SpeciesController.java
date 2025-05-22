@@ -22,6 +22,7 @@ public class SpeciesController {
         return speciesService.findAllSpecies();
     }
 
+    //模糊查找
     @RequestMapping("/getSpeciesByTaxonNameContains")
     public List<Species> getSpeciesByTaxonNameContains(String name) {
         return speciesService.getSpeciesByTaxonNameContains(name);
@@ -42,6 +43,8 @@ public class SpeciesController {
     public List<Species> getSpeciesByCh_nameContains(String ch_name) {
         return speciesService.getSpeciesByCh_nameContains(ch_name);
     }
+
+    //精确查找
     @RequestMapping("/findSpeciesByNodeId")
     public List<Species> findSpeciesByNodeId(long id) {
         return speciesService.findSpeciesByNodeId(id);
@@ -53,5 +56,45 @@ public class SpeciesController {
     @RequestMapping("/findSpeciesByArea")
     public List<Species> findSpeciesByArea(String area) {
         return speciesService.findSpeciesByArea(area);
+    }
+    @RequestMapping("/findSpeciesByPubDate")
+    public List<Species> findSpeciesByPubDate(String pub_date) {
+        return speciesService.findSpeciesByPubDate(pub_date);
+    }
+    @RequestMapping("/findSpeciesByGenus")
+    public List<Species> findSpeciesByGenus(String genus) {
+        return speciesService.findSpeciesByGenus(genus);
+    }
+
+    //增删改
+    @RequestMapping("/createSpecies")
+    public void createSpecies(int plant_id, String taxon_rank, String taxon_name, String Family, String area, String genus, String ch_name, int publish_date) {
+        speciesService.createSpecies(plant_id, taxon_rank, taxon_name, Family, area, genus, ch_name, publish_date);
+    }
+    @RequestMapping("/deleteSpecies")
+    public void deleteSpecies(long node_id) {
+        speciesService.deleteSpecies(node_id);
+    }
+    @RequestMapping("/updateSpecies")
+    public void updateSpecies(long id, String taxon_rank, String taxon_name, String Family, String genus, String area, String ch_name, int publish_date) {
+        speciesService.updateSpecies(id, taxon_rank, taxon_name, Family, genus, area, ch_name, publish_date);
+    }
+
+    //计数
+    @RequestMapping("/countSpeciesByGenus")
+    public int countSpeciesByGenus(String genus) {
+        return speciesService.countSpeciesByGenus(genus);
+    }
+    @RequestMapping("/countSpeciesByArea")
+    public int countSpeciesByArea(String area) {
+        return speciesService.countSpeciesByArea(area);
+    }
+    @RequestMapping("/countSpeciesByFamily")
+    public int countSpeciesByFamily(String family) {
+        return speciesService.countSpeciesByFamily(family);
+    }
+    @RequestMapping("/countSpeciesByPub_date")
+    public int countSpeciesByPub_date(int pub_date) {
+        return speciesService.countSpeciesByPub_date(pub_date);
     }
 }

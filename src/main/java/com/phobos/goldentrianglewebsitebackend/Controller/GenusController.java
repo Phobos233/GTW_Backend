@@ -52,6 +52,12 @@ public class GenusController {
     public List<Genus> findGenusByFamily(String family) {
         return genusService.findGenusByFamily(family);
     }
+
+    @RequestMapping("/findAllGenusWithPage")
+    public List<Genus> findAllGenusWithPage(int page, int size) {
+        return genusService.findAllGenusWithPage(page, size);
+    }
+
     @RequestMapping("/createGenus")
     public void createGenus(int plant_id, String taxon_rank, String taxon_name, String Family, String ch_name) {
         genusService.createGenus(plant_id, taxon_rank, taxon_name, Family, ch_name);

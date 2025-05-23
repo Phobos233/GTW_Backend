@@ -140,6 +140,34 @@ public interface SpeciesRepo extends Neo4jRepository<Species, Long> {
             ",m.ch_name as ch_name")
     List<Species> findSpeciesByGenus(String genus);
 
+    // 通过复合条件查找植物节点
+
+    @Query("MATCH (m:species) WHERE m.area = $area AND m.genus = $genus RETURN ID(m) as node_id" +
+            ",m.plant_id as plant_id" +
+            ",m.taxon_name as taxon_name" +
+            ",m.taxon_rank as taxon_rank" +
+            ",m.family as family" +
+            ",m.genus as genus" +
+            ",m.genus_c as genus_c"+
+            ",m.area as area" +
+            ",m.publish_date as publish_date" +
+            ",m.ch_name as ch_name")
+    List<Species> findSpeciesByAreaAndGenus(String area, String genus);
+
+    //分页查找
+    @Query("MATCH (m:species) RETURN ID(m) as node_id" +
+            ",m.plant_id as plant_id" +
+            ",m.taxon_name as taxon_name" +
+            ",m.taxon_rank as taxon_rank" +
+            ",m.family as family" +
+            ",m.genus as genus" +
+            ",m.genus_c as genus_c" +
+            ",m.area as area" +
+            ",m.publish_date as publish_date" +
+            ",m.ch_name as ch_name SKIP $skip LIMIT $limit")
+    List<Species> findAllSpeciesWithPage(int skip, int limit);
+
+
     /**
      * 创建植物节点
      */

@@ -29,16 +29,24 @@ public interface GenusService {
     // 根据属学名查询属
     List<Genus> findGenusByTaxonName(String taxon_name);
 
+    // 根据属学名列表查询属
     List<Genus> findGenusByTaxonName(List<String> taxon_names);
+
+    // 根据图表需要查询属
+    List<Genus> findGenusInNeed();
+
+    //分页查询
+    List<Genus> findAllGenusWithPage(int page, int size);
 
     // 创建属
     void createGenus(int plant_id, String taxon_rank, String taxon_name, String Family, String ch_name);
 
     // 删除属
-    public void deleteGenus(long node_id);
+    void deleteGenus(long node_id);
 
     // 更新属
     void updateGenus(long node_id, String taxon_name, String Family, String taxon_rank, String ch_name);
+
     // 计数
     int countGenusByFamily(String family);
     int countAllGenus();

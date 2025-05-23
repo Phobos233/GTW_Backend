@@ -36,6 +36,11 @@ public interface SpeciesService {
     List<Species> findSpeciesByPubDate(String pub_date);
     // 根据属查询
     List<Species> findSpeciesByGenus(String genus);
+    //复合查询
+    List<Species> findSpeciesByGenusAndArea(String genus, String area);
+
+    //分页查询
+    List<Species> findAllSpeciesWithPage(int page, int size);
 
     // 创建物种
     void createSpecies(int plant_id,String taxon_rank, String taxon_name, String Family, String area, String genus, String ch_name, int publish_date);

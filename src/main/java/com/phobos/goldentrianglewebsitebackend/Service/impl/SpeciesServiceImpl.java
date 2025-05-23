@@ -73,6 +73,17 @@ public class SpeciesServiceImpl implements SpeciesService {
     }
 
     @Override
+    public List<Species> findSpeciesByGenusAndArea(String genus, String area) {
+        return speciesRepo.findSpeciesByAreaAndGenus(area, genus);
+    }
+
+    @Override
+    public List<Species> findAllSpeciesWithPage(int page, int size) {
+        int start = (page - 1) * size;
+        return speciesRepo.findAllSpeciesWithPage(start, size);
+    }
+
+    @Override
     public void createSpecies(int plant_id
             , String taxon_rank
             , String taxon_name

@@ -83,6 +83,25 @@ public interface GenusRepo extends Neo4jRepository<Genus, Long> {
             ",m.ch_name as ch_name")
     List<Genus> findGenusByTaxonName(String TaxonName);
 
+    @Query("MATCH (m)-[r]-() WITH m, COUNT(DISTINCT r) AS rel_count WHERE rel_count > 5 RETURN ID(m) As node_id" +
+            ",m.plant_id as plant_id" +
+            ",m.taxon_name as taxon_name" +
+            ",m.taxon_rank as taxon_rank" +
+            ",m.family as family" +
+            ",m.ch_name as ch_name"+
+            " Order BY rand() Limit 10")
+    List<Genus> findGenusInNeed();
+
+    // 分页查询属节点
+    @Query("MATCH (m:genus) RETURN ID(m) as node_id" +
+            ",m.plant_id as plant_id" +
+            ",m.taxon_name as taxon_name" +
+            ",m.taxon_rank as taxon_rank" +
+            ",m.family as family" +
+            ",m.ch_name as ch_name" +
+            " SKIP $start LIMIT $size")
+    List<Genus> findAllGenusWithPage(int start, int size);
+
     /**
      * 创建属节点
      */

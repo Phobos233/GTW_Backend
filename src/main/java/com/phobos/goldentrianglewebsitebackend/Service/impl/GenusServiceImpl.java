@@ -3,6 +3,7 @@ package com.phobos.goldentrianglewebsitebackend.Service.impl;
 import com.phobos.goldentrianglewebsitebackend.Model.Genus;
 import com.phobos.goldentrianglewebsitebackend.Repository.GenusRepo;
 import com.phobos.goldentrianglewebsitebackend.Service.GenusService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class GenusServiceImpl implements GenusService {
 
     private final GenusRepo genusRepo;
 
+    @Autowired
     public GenusServiceImpl(GenusRepo genusRepo) {
         this.genusRepo = genusRepo;
     }
@@ -64,6 +66,17 @@ public class GenusServiceImpl implements GenusService {
             genus_result.addAll(genusRepo.findGenusByTaxonName(genus));
         }
         return genus_result;
+    }
+
+    @Override
+    public List<Genus> findGenusInNeed() {
+        return genusRepo.findGenusInNeed();
+    }
+
+    @Override
+    public List<Genus> findAllGenusWithPage(int page, int size) {
+        int start = (page - 1) * size;
+        return genusRepo.findAllGenusWithPage(start, size);
     }
 
     @Override

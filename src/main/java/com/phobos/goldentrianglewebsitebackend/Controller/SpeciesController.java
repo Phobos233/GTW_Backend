@@ -66,6 +66,12 @@ public class SpeciesController {
         return speciesService.findSpeciesByGenus(genus);
     }
 
+    //分页查找
+    @RequestMapping("/findAllSpeciesWithPage")
+    public List<Species> findAllSpeciesWithPage(int page, int size) {
+        return speciesService.findAllSpeciesWithPage(page, size);
+    }
+
     //增删改
     @RequestMapping("/createSpecies")
     public void createSpecies(int plant_id, String taxon_rank, String taxon_name, String Family, String area, String genus, String ch_name, int publish_date) {

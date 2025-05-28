@@ -1,6 +1,6 @@
 package com.phobos.goldentrianglewebsitebackend.Controller;
 
-import com.phobos.goldentrianglewebsitebackend.Model.dto.ChartsInfo;
+import com.phobos.goldentrianglewebsitebackend.Model.dto.ChartsInfo_Node;
 import com.phobos.goldentrianglewebsitebackend.Model.Plant;
 import com.phobos.goldentrianglewebsitebackend.Service.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,9 @@ public class PlantController {
         this.plantService = plantService;
     }
 
-
+    // 查询所有植物
     @RequestMapping("/findAll")
     public List<Plant> findAllPlants(){
-        System.out.println(plantService.findAll().toString());
         return plantService.findAll();
     }
 
@@ -60,19 +59,19 @@ public class PlantController {
         return plantService.findById(id);
     }
     @RequestMapping("/Chart")
-    public List<ChartsInfo> getChartsInfo() {
+    public List<ChartsInfo_Node> getChartsInfo() {
         List<Plant> Plants = plantService.findAll();
-        List<ChartsInfo> chartsInfos = new ArrayList<>();
+        List<ChartsInfo_Node> chartsInfoNodes = new ArrayList<>();
         if (!Plants.isEmpty()) {
             for (Plant plant : Plants) {
-                ChartsInfo chartsInfo = new ChartsInfo();
-                chartsInfo.setId(plant.getId());
-                chartsInfo.setName(plant.getTaxon());
-                chartsInfo.setValue(plant.getFamily());
-                chartsInfos.add(chartsInfo);
+                ChartsInfo_Node chartsInfoNode = new ChartsInfo_Node();
+                chartsInfoNode.setId(String.valueOf(plant.getId()));
+                chartsInfoNode.setName(plant.getTaxon());
+                chartsInfoNode.setValue(plant.getFamily());
+                chartsInfoNodes.add(chartsInfoNode);
             }
         }
-        return  chartsInfos;
+        return chartsInfoNodes;
     }
 
 

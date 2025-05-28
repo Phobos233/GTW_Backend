@@ -27,6 +27,11 @@ public class RelationshipController {
         return relationshipService.findRelationshipByStartNodeID(startNodeId);
     }
 
+    @RequestMapping("/getRelationshipWithPages")
+    public List<Relationship> getRelationshipWithPages(int page, int size) {
+        return relationshipService.findAllRelWithPages(page, size);
+    }
+
     @RequestMapping("/createRelationship")
     public void createRelationship(long startNodeId, long endNodeId ,String relationshipType) {
         relationshipService.createNodeRelationship(relationshipType,startNodeId, endNodeId );
@@ -35,17 +40,22 @@ public class RelationshipController {
     public void deleteRelationship(long id) {
         relationshipService.deleteNodeRelationship(id);
     }
+
     @RequestMapping("/getEdgesForCharts")
     public List<ChartsEdgeInfo> getAllEdgesForCharts() {
         List<Relationship> relationships = relationshipService.findAllRelationships();
         List<ChartsEdgeInfo> chartsEdgeInfos = new ArrayList<>();
         for (Relationship relationship : relationships) {
             ChartsEdgeInfo chartsEdgeInfo = new ChartsEdgeInfo();
-            chartsEdgeInfo.setSource(relationship.getStartNodeId());
+            chartsEdgeInfo.setSource(String.valueOf(relationship.getStartNodeId()));
             chartsEdgeInfo.setValue(relationship.getType());
-            chartsEdgeInfo.setTarget(relationship.getEndNodeId());
+            chartsEdgeInfo.setTarget(String.valueOf(relationship.getEndNodeId()));
             chartsEdgeInfos.add(chartsEdgeInfo);
         }
         return chartsEdgeInfos;
+    }
+    @RequestMapping("/getAllRelationshipCount")
+    public int getAllRelationshipCount() {
+        return relationshipService.countAllRelationships();
     }
 }

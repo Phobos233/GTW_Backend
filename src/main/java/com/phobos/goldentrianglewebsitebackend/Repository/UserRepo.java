@@ -18,4 +18,7 @@ public interface UserRepo extends Neo4jRepository<User, Long> {
     @Query("Match (m:user) return ID(m) as id,Labels(m) as label,m.username as username,m.password as password")
     List<User> findAllUser();
 
+    @Query("Match (m:user:admin) Where ID(m) = $id return ID(m) as id,m.username as username,m.password as password")
+    List<User> findUserByType(String type);
+
 }

@@ -11,4 +11,6 @@ public interface RelationshipService {
     List<Relationship> findRelationshipByEndNodeID(long endNodeID);
     void createNodeRelationship(String type, long startNodeId, long endNodeId);
     void deleteNodeRelationship(long id);
+    List<Relationship> findAllRelWithPages(int page, int size);
+    int countAllRelationships();
 }

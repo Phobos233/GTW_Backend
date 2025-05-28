@@ -49,4 +49,9 @@ public class LikeServiceImpl implements LikeService {
     public List<LikeRelationship> createLikeRelationship(long authorId, long likeToId) {
         return likeRepo.createLikeRelationship(authorId, likeToId);
     }
+
+    @Override
+    public int getLikeCountByAuthorId(long authorId) {
+        return likeRepo.countLikeByAuthorId(authorId);
+    }
 }

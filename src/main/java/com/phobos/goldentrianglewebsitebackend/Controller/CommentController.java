@@ -52,4 +52,15 @@ public class CommentController {
         commentService.deleteComment(commentId);
     }
 
+    //获取评论数量
+    @RequestMapping("/comment/count/authorId")
+    public int getCommentCountByAuthorId(long authorId) {
+        return commentService.getCommentCountByAuthorId(authorId);
+    }
+
+    @RequestMapping("/comment/count/commentToId")
+    public int getCommentCountByCommentToId(long commentToId) {
+        return commentService.getCommentCountByCommentToId(commentToId);
+    }
+
 }

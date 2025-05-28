@@ -89,7 +89,7 @@ public interface GenusRepo extends Neo4jRepository<Genus, Long> {
             ",m.taxon_rank as taxon_rank" +
             ",m.family as family" +
             ",m.ch_name as ch_name"+
-            " Order BY rand() Limit 10")
+            " Order BY rand() Limit 15")
     List<Genus> findGenusInNeed();
 
     // 分页查询属节点
@@ -106,12 +106,12 @@ public interface GenusRepo extends Neo4jRepository<Genus, Long> {
      * 创建属节点
      */
     @Query("CREATE (n:Genus {plant_id: $.plant_id" +
-            ",taxon_rank: $taxon_rank" +
+            ",taxon_rank:'Genus'" +
             ",taxon_name: $taxon_name " +
             ",family: $Family " +
             ",ch_name: $ch_name" +
             "}) " )
-    void createGenus(int plant_id, String taxon_rank, String taxon_name, String Family, String ch_name);
+    void createGenus(int plant_id,  String taxon_name, String Family, String ch_name);
 
     @Query("MATCH (n:Genus) where ID(n)=$node_id DELETE n")
     void deleteGenus(long node_id);
@@ -125,4 +125,14 @@ public interface GenusRepo extends Neo4jRepository<Genus, Long> {
 
     @Query("Match (m:genus) RETURN count(m)")
     int countAllGenus();
+
+    //随机
+    @Query("MATCH (m:genus) RETURN ID(m) as node_id" +
+            ",m.plant_id as plant_id" +
+            ",m.taxon_name as taxon_name" +
+            ",m.taxon_rank as taxon_rank" +
+            ",m.family as family" +
+            ",m.ch_name as ch_name"+
+            " Order BY rand() Limit 1")
+    List<Genus> findGenusRandom();
 }

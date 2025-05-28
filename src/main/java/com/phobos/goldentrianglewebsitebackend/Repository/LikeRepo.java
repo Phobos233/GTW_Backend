@@ -60,4 +60,7 @@ public interface LikeRepo extends Neo4jRepository<LikeRelationship,Long> {
             ",n.ch_name as likeTo" +
             ",apoc.date.format(r.timestamp,'ms','yyyy/MM/dd HH:mm:ss','Asia/Shanghai') as datetime" )
     List<LikeRelationship> createLikeRelationship(long authorId, long likeToId);
+
+    @Query("Match (m:user)-[r:like]->(n:plant) Where ID(m) = $authorId return count(r)" )
+    int countLikeByAuthorId(long authorId);
 }

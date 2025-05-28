@@ -103,4 +103,9 @@ public class SpeciesController {
     public int countSpeciesByPub_date(int pub_date) {
         return speciesService.countSpeciesByPub_date(pub_date);
     }
+
+    @RequestMapping("/countAllSpecies")
+    public int countAllSpecies() {
+        return speciesService.countAllSpecies();
+    }
 }

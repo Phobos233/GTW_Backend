@@ -16,6 +16,6 @@ public interface CommentService {
     List<Comment> addComment(long authorId, long commentToId, String content);
     void deleteComment(long commentId);
 
-
-
+    int getCommentCountByAuthorId(long authorId);
+    int getCommentCountByCommentToId(long commentToId);
 }

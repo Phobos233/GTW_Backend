@@ -8,8 +8,8 @@ public class CollectRelationship {
     @Id
     private long CollectId;
     private String Collector;
-    private String CollectorId;
+    private long CollectorId;
     private String Collection;
-    private String CollectionId;
+    private long CollectionId;
     private String datetime;
 }

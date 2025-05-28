@@ -49,4 +49,10 @@ public class CollectController {
         collectService.deleteCollectRelationship(collectRelationshipId);
     }
 
+    //统计
+    @RequestMapping("/collect/count/collectorId")
+    public int getCollectRelationshipCountByCollectorId(long collectorId) {
+        return collectService.getCollectRelationshipCountByCollectorId(collectorId);
+    }
+
 }

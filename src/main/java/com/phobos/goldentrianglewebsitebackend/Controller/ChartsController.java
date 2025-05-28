@@ -151,6 +151,44 @@ public class ChartsController {
         return nodes;
     }
 
+    @RequestMapping("/findCNodesByGenus")
+    List<ChartsInfo_Node> findNodesByGenus(String genus){
+        List<ChartsInfo_Node> nodes = new ArrayList<>();
+        List<Genus> genus_list = genusService.findGenusByTaxonName(genus);
+        for (Genus genus1 : genus_list) {
+            ChartsInfo_Node node = new ChartsInfo_Node();
+            node.setId(String.valueOf(genus1.getNode_id()));
+            node.setName(genus1.getTaxon_name());
+            node.setValue(genus1.getCh_name());
+            node.setType(genus1.getTaxon_rank());
+            nodes.add(node);
+        }
+        List<Species> plants = speciesService.getSpeciesByGenusContains(genus);
+        for (Species plant : plants) {
+            ChartsInfo_Node node = new ChartsInfo_Node();
+            node.setValue(plant.getCh_name());
+            node.setName(plant.getTaxon_name());
+            node.setId(String.valueOf(plant.getNode_id()));
+            nodes.add(node);
+        }
+        return nodes;
+    }
+
+    @RequestMapping("/findCEdgesByGenus")
+    List<ChartsEdgeInfo> findCEdgesByGenus(long genus_id){
+        List<ChartsEdgeInfo> edges = new ArrayList<>();
+        List<Relationship> relationships = relationshipService.findRelationshipByEndNodeID(genus_id);
+        for (Relationship relationship : relationships) {
+            ChartsEdgeInfo edge = new ChartsEdgeInfo();
+            edge.setSource(String.valueOf(relationship.getStartNodeId()));
+            edge.setTarget(String.valueOf(relationship.getEndNodeId()));
+            edge.setValue(relationship.getType());
+            edges.add(edge);
+        }
+        return edges;
+    }
+
+
     //分页查找植物节点
     @RequestMapping("/findNodesWithPages")
     public List<ListInfo> findNodesWithPages(int page, int size){
@@ -166,8 +204,12 @@ public class ChartsController {
     public List<ListInfo> findNodesByTaxonNameContainsWithPage(String taxon_name, int page, int size){
         return listInfoService.findListInfoByTaxonNameContainsWithPage(taxon_name, page, size);
     }
+    @RequestMapping("/findNodesByAreaWithPage")
+    public List<ListInfo> findNodesByAreaWithPage(String area, int page, int size){
+        return listInfoService.findListInfoByAreaWithPage(area, page, size);
+    }
 
-    // 统计数据
+    // 统计搜索数据
     @RequestMapping("/getCounts")
     public int[] getCounts(){
         return new int[]{0,0,0,0,0,0,0,0,0,0};
@@ -184,6 +226,9 @@ public class ChartsController {
     public int getCountsByTaxonNameContains(String taxon_name){
         return listInfoService.countListInfoByTaxonNameContains(taxon_name);
     }
-
+    @RequestMapping("/getListInfoCountsByArea")
+    public int getCountsByArea(String area){
+        return listInfoService.countListInfoByArea(area);
+    }
 
 }

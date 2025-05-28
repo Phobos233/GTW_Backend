@@ -80,8 +80,8 @@ public class GenusServiceImpl implements GenusService {
     }
 
     @Override
-    public void createGenus(int plant_id, String taxon_rank, String taxon_name, String Family, String ch_name) {
-        genusRepo.createGenus(plant_id, taxon_rank, taxon_name, Family, ch_name);
+    public void createGenus(int plant_id,  String taxon_name, String Family, String ch_name) {
+        genusRepo.createGenus(plant_id,  taxon_name, Family, ch_name);
     }
 
     @Override

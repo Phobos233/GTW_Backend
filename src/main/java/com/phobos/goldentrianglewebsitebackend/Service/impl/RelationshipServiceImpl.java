@@ -45,4 +45,15 @@ public class RelationshipServiceImpl implements RelationshipService {
     public void deleteNodeRelationship(long id) {
         relationshipRepo.deleteNodeRelationship(id);
     }
+
+    @Override
+    public List<Relationship> findAllRelWithPages(int page, int size) {
+        int skip = (page - 1) * size;
+        return relationshipRepo.findAllRelWithPages(skip, size);
+    }
+
+    @Override
+    public int countAllRelationships() {
+        return relationshipRepo.countAllRelationships();
+    }
 }

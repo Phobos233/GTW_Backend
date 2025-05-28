@@ -9,8 +9,8 @@ public class Comment {
     private long commentId;
     private String content;
     private String author;
-    private String authorId;
+    private long authorId;
     private String datetime;
     private String commentTo;
-    private String commentToId;
+    private long commentToId;
 }

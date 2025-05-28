@@ -52,4 +52,14 @@ public class CommentServiceImpl implements CommentService {
     public void deleteComment(long commentId) {
         commentRepo.deleteComment(commentId);
     }
+
+    @Override
+    public int getCommentCountByAuthorId(long authorId) {
+        return commentRepo.countCommentByAuthorId(authorId);
+    }
+
+    @Override
+    public int getCommentCountByCommentToId(long commentToId) {
+        return commentRepo.countCommentByCommentToId(commentToId);
+    }
 }

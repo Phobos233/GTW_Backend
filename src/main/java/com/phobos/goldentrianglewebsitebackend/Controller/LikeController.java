@@ -46,4 +46,9 @@ public class LikeController {
         likeService.deleteLikeRelationshipByLikeId(likeId);
     }
 
+    @RequestMapping("/like/count/authorId")
+    public int getLikeCountByAuthorId(long authorId) {
+        return likeService.getLikeCountByAuthorId(authorId);
+    }
+
 }

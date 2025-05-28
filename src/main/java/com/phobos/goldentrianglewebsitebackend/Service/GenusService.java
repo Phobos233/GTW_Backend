@@ -39,7 +39,7 @@ public interface GenusService {
     List<Genus> findAllGenusWithPage(int page, int size);
 
     // 创建属
-    void createGenus(int plant_id, String taxon_rank, String taxon_name, String Family, String ch_name);
+    void createGenus(int plant_id, String taxon_name, String Family, String ch_name);
 
     // 删除属
     void deleteGenus(long node_id);

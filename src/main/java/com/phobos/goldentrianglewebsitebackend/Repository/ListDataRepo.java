@@ -20,6 +20,9 @@ public interface ListDataRepo extends Neo4jRepository<ListInfo, Long> {
     @Query("MATCH (m:plant) Where m.taxon_name contains $taxon_name return ID(m) as id,m.taxon_name as taxon_name,m.ch_name as ch_name,m.taxon_rank as taxon_rank SKIP $start LIMIT $size")
     List<ListInfo> findListInfoByTaxonNameContainingWithPage(String taxon_name, int start, int size);
 
+    @Query("MATCH (m:species) Where m.area contains $area return ID(m) as id,m.taxon_name as taxon_name,m.ch_name as ch_name,m.taxon_rank as taxon_rank SKIP $start LIMIT $size")
+    List<ListInfo> findListInfoByAreaContainingWithPage(String area, int start, int size);
+
     @Query("match (m:plant) return count(m)")
     int countAllListInfo();
 
@@ -28,6 +31,9 @@ public interface ListDataRepo extends Neo4jRepository<ListInfo, Long> {
 
     @Query("match (m:plant) where m.ch_name contains $ch_name return count(m)")
     int countByChName(String ch_name);
+
+    @Query("match (m:species) where m.area contains $area return count(m)")
+    int countByArea(String area);
 
 
 }

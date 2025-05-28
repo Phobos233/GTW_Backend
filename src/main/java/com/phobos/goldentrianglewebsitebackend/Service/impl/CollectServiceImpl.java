@@ -54,5 +54,10 @@ public class CollectServiceImpl implements CollectService {
         collectRepo.deleteCollectRelationship(CollectRelationshipId);
     }
 
+    @Override
+    public int getCollectRelationshipCountByCollectorId(long CollectorId) {
+        return collectRepo.countCollectByCollectorId(CollectorId);
+    }
+
 
 }

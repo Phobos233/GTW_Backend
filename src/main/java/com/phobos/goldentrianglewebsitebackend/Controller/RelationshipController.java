@@ -27,6 +27,11 @@ public class RelationshipController {
         return relationshipService.findRelationshipByStartNodeID(startNodeId);
     }
 
+    @RequestMapping("/getRelationshipWithPages")
+    public List<Relationship> getRelationshipWithPages(int page, int size) {
+        return relationshipService.findAllRelWithPages(page, size);
+    }
+
     @RequestMapping("/createRelationship")
     public void createRelationship(long startNodeId, long endNodeId ,String relationshipType) {
         relationshipService.createNodeRelationship(relationshipType,startNodeId, endNodeId );
@@ -35,6 +40,7 @@ public class RelationshipController {
     public void deleteRelationship(long id) {
         relationshipService.deleteNodeRelationship(id);
     }
+
     @RequestMapping("/getEdgesForCharts")
     public List<ChartsEdgeInfo> getAllEdgesForCharts() {
         List<Relationship> relationships = relationshipService.findAllRelationships();
@@ -47,5 +53,9 @@ public class RelationshipController {
             chartsEdgeInfos.add(chartsEdgeInfo);
         }
         return chartsEdgeInfos;
+    }
+    @RequestMapping("/getAllRelationshipCount")
+    public int getAllRelationshipCount() {
+        return relationshipService.countAllRelationships();
     }
 }

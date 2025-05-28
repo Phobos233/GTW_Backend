@@ -14,4 +14,6 @@ public interface LikeService {
 
     void deleteLikeRelationshipByLikeId(long id);
     List<LikeRelationship> createLikeRelationship(long authorId, long likeToId);
+
+    int getLikeCountByAuthorId(long authorId);
 }

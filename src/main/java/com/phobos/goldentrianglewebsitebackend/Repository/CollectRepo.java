@@ -60,4 +60,8 @@ public interface CollectRepo extends Neo4jRepository<CollectRelationship, Long> 
             ", apoc.date.format(r.timestamp,'ms','yyyy/MM/dd HH:mm:ss','Asia/Shanghai') as datetime")
     List<CollectRelationship> createCollectRelationship(long userId, long plantId);
 
+    @Query("MATCH (m:user)-[r:collect]->(n:plant) WHERE ID(m) = $collectorId return count(r)")
+    int countCollectByCollectorId(long collectorId);
+
+
 }

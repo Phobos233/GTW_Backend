@@ -8,8 +8,8 @@ public class LikeRelationship {
     @Id
     private long likeId;
     private String author;
-    private String authorId;
+    private long authorId;
     private String likeTo;
-    private String likeToId;
+    private long likeToId;
     private String datetime;
 }

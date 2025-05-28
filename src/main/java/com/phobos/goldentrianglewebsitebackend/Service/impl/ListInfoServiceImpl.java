@@ -35,6 +35,12 @@ public class ListInfoServiceImpl implements ListInfoService {
         return listDataRepo.findListInfoByTaxonNameContainingWithPage(taxon_name, start, size);
     }
 
+    @Override
+    public List<ListInfo> findListInfoByAreaWithPage(String area, int page, int size) {
+        int skip = (page - 1) * size;
+        return listDataRepo.findListInfoByAreaContainingWithPage(area, skip, size);
+    }
+
     //统计
     @Override
     public int countListInfoByChNameContains(String ch_name) {
@@ -44,6 +50,11 @@ public class ListInfoServiceImpl implements ListInfoService {
     @Override
     public int countListInfoByTaxonNameContains(String taxon_name) {
         return listDataRepo.countByTaxonName(taxon_name);
+    }
+
+    @Override
+    public int countListInfoByArea(String area) {
+        return listDataRepo.countByArea(area);
     }
 
     @Override

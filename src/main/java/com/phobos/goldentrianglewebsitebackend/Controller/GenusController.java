@@ -59,8 +59,8 @@ public class GenusController {
     }
 
     @RequestMapping("/createGenus")
-    public void createGenus(int plant_id, String taxon_rank, String taxon_name, String Family, String ch_name) {
-        genusService.createGenus(plant_id, taxon_rank, taxon_name, Family, ch_name);
+    public void createGenus(int plant_id, String taxon_name, String Family, String ch_name) {
+        genusService.createGenus(plant_id, taxon_name, Family, ch_name);
     }
     @RequestMapping("/deleteGenus")
     public void deleteGenus(long node_id) {

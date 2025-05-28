@@ -20,4 +20,5 @@ public interface CollectService {
     List<CollectRelationship> createCollectRelationship(long CollectorId, long CollectRelationshipToId);
     void deleteCollectRelationship(long CollectRelationshipId);
 
+    int getCollectRelationshipCountByCollectorId(long CollectorId);
 }

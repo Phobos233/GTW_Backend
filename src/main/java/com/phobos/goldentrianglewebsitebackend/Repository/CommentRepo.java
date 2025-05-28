@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface CommentRepo extends Neo4jRepository<Comment, Long> {
 
-    @Query("Match (m:user)-[r:comment]->(n:plant) Where ID(m) = $authorId RETURN ID(m) as node_id" +
+    @Query("Match (m:user)-[r:comment]->(n:plant) Where ID(m) = $authorId RETURN ID(r) as commentId" +
             ",r.content as content" +
             ",m.username as author" +
             ",ID(m) as authorId" +
@@ -19,7 +19,7 @@ public interface CommentRepo extends Neo4jRepository<Comment, Long> {
             ",ID(n) as commentToId")
     List<Comment> getCommentsByAuthorId(long AuthorId);
 
-    @Query("Match (m:user)-[r:comment]->(n:plant) Where ID(m) = $authorId and ID(n) = $CommentToId RETURN ID(m) as node_id" +
+    @Query("Match (m:user)-[r:comment]->(n:plant) Where ID(m) = $authorId and ID(n) = $CommentToId RETURN ID(r) as commentId" +
             ",r.content as content" +
             ",m.username as author" +
             ",ID(m) as authorId" +
@@ -29,7 +29,7 @@ public interface CommentRepo extends Neo4jRepository<Comment, Long> {
     List<Comment> getCommentsByAuthorIdAndCommentToId(long CommentToId, long AuthorId);
 
     @Query("Match (m:user)-[r:comment]->(n:plant) Where ID(n) = $CommentToId" +
-            " RETURN ID(m) as id" +
+            " RETURN ID(r) as commentId" +
             ",r.content as content" +
             ",m.username as author" +
             ",ID(m) as authorId" +
@@ -40,7 +40,7 @@ public interface CommentRepo extends Neo4jRepository<Comment, Long> {
 
     //分页查询
     @Query("Match (m:user)-[r:comment]->(n:plant) Where ID(n) = $CommentToId" +
-            " RETURN ID(m) as id" +
+            " RETURN ID(r) as commentId" +
             ",r.content as content" +
             ",m.username as author" +
             ",ID(m) as authorId" +
@@ -51,7 +51,7 @@ public interface CommentRepo extends Neo4jRepository<Comment, Long> {
     List<Comment> getCommentsByCommentToIdWithPage(long CommentToId, int skip, int limit);
 
     @Query("Match (m:user)-[r:comment]->(n:plant) Where ID(m) = $authorId"
-            + " RETURN ID(m) as node_id"
+            + " RETURN ID(r) as commentId"
             + ", r.content as content"
             + ", m.username as author"
             + ", ID(m) as authorId"
@@ -63,7 +63,7 @@ public interface CommentRepo extends Neo4jRepository<Comment, Long> {
 
     @Query("Match (m:user),(n:plant) Where ID(m)=$authorId and ID(n) = $commentToId"
             + " Create (m)-[r:comment{content:$content,timestamp:timestamp()}]->(n)"
-            + " RETURN ID(m) as node_id"
+            + " RETURN ID(r) as commentId"
             + ", r.content as content"
             + ", m.username as author"
             + ", ID(m) as authorId"
@@ -74,5 +74,12 @@ public interface CommentRepo extends Neo4jRepository<Comment, Long> {
 
     @Query("Match (m:user)-[r:comment]->(n:plant) Where ID(r) = $commentId Delete r")
     void deleteComment(long commentId);
+
+    @Query("Match (m:user)-[r:comment]->(n:plant) Where ID(m) = $authorId return count(r)")
+    int countCommentByAuthorId(long authorId);
+
+    @Query("Match (m:user)-[r:comment]->(n:plant) Where ID(n) = $commentToId return count(r)")
+    int countCommentByCommentToId(long commentToId);
+
 
 }
